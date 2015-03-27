@@ -1,7 +1,6 @@
 palavras = open('entrada.txt','r+',encoding='utf-8')
 from random import randint
 import turtle
-import time
 
 
 forca = turtle.Screen()
