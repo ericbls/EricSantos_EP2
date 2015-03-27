@@ -260,8 +260,8 @@ while (x<=len(lista_palavras)):
                 lapis.pendown()
                 lapis.write('YOU DIED / VOCÊ MORREU',font=('Arial',40,'bold'))
                 lapis.penup()                
-                z = forca.textinput('Digite "sair" para sair ou clique em cancel para continuar para próxima palavra')
-                if z == 'sair':
+                z = forca.textinput('Continuar?','Digite "continuar" para ir para próxima palavra ou sair para fechar')
+                if z == 'continuar':
                     break               
        
 
