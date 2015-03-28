@@ -1,0 +1,284 @@
+palavras = open('entrada.txt','r+',encoding='utf-8')
+from random import randint
+import turtle
+
+
+forca = turtle.Screen()
+forca.screensize(canvwidth=800,canvheight=600,bg='orange')
+forca.title("Jogo Da Forca")
+
+caneta= turtle.Turtle()
+caneta.hideturtle()
+
+lapis= turtle.Turtle()
+lapis.hideturtle()
+lapis.speed(10)
+
+pincel=turtle.Turtle()                                                        #Desenha a forca
+pincel.speed(8)
+pincel.penup()
+pincel.setpos(-300,-200)
+pincel.pendown()
+pincel.color("darkblue")
+pincel.width(width=4)
+
+pincel.backward(150)
+pincel.right(90)
+pincel.forward(50)
+pincel.left(90)
+pincel.forward(150)
+pincel.left(90)
+pincel.forward(50)
+pincel.penup()
+
+pincel.setpos(-400,-200)
+pincel.pendown()
+pincel.forward(500)
+pincel.right(90)
+pincel.forward(200)
+pincel.right(90)
+pincel.forward(100)
+pincel.penup()
+pincel.setheading(270)
+pincel.setpos(0,399)
+
+def cabeca():
+    lapis.setheading(270)                                                                 #Desenha a cabeça
+    lapis.setpos(-200,200)    
+    lapis.width(width=2)
+    lapis.pendown()
+    lapis.color('darkred')
+    lapis.speed(11)
+    lapis.right(90)
+    lapis.circle(30)
+    lapis.penup()
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def tronco():                                                                  #Desenha o tronco
+    lapis.setheading(270)    
+    lapis.setpos(-200,140)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.forward(120)
+    lapis.penup()
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def braco1():                                                                  #Desenha o braço direito
+    lapis.setheading(270)    
+    lapis.setpos(-200,130)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.right(35)
+    lapis.forward(50)
+    lapis.left(35)
+    lapis.forward(40)
+    lapis.penup()
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def braco2():                                                                  #Desenha o braço esquerdo
+    lapis.setheading(270)    
+    lapis.setpos(-200,130)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.left(35)
+    lapis.forward(50)
+    lapis.right(35)
+    lapis.forward(40)
+    lapis.penup()
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def perna1():                                                                  #Desenha a perna direita 
+    lapis.setheading(270)    
+    lapis.setpos(-200,20)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.right(20)
+    lapis.forward(100)
+    lapis.penup()
+    lapis.left(20)
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def perna2():                                                                  #Desenha a perna esquerda  
+    lapis.setheading(270)    
+    lapis.setpos(-200,20)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.left(20)
+    lapis.forward(100)
+    lapis.penup()
+    lapis.right(20)
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+def rosto():                                                                   #Dsenha o rosto
+    lapis.setheading(270)    
+    lapis.setpos(-205,182)
+    lapis.width(width=2)
+    lapis.color('darkred')
+    lapis.pendown()
+    lapis.right(45)
+    lapis.forward(15)
+    lapis.penup()
+    lapis.setpos(-215,182)
+    lapis.pendown()
+    lapis.left(90)
+    lapis.forward(15)
+    lapis.penup()
+    lapis.setpos(-195,182)
+    lapis.pendown()
+    lapis.forward(15)
+    lapis.penup()
+    lapis.setpos(-185,182)
+    lapis.pendown()
+    lapis.right(90)
+    lapis.forward(15)
+    lapis.penup()
+    lapis.setpos(-190,150)
+    lapis.pendown()
+    lapis.setheading(90)
+    lapis.circle(10,180)
+    lapis.penup()
+    lapis.setheading(270)
+    lapis.setpos(0,399)
+    
+
+
+lista_palavras = []                                                            #Define as palavras que entrarão no jogo da forca em uma lista
+for ad_palavra in palavras:
+    temp = ad_palavra.upper().strip()
+    if temp =='':
+        None
+    else:
+        lista_palavras.append(temp)
+        
+x=0
+        
+while (x<=len(lista_palavras)):
+    
+    lapis.clear()
+    palavra_escolhida = lista_palavras[randint(0,int(len(lista_palavras)-1))]    # Escolhe uma palavra/conjunto de palavras aleatória da lista de palavras
+    lista_palavras.remove(palavra_escolhida)                                   #retira a palavra/conjunto de palavras que já foi escolhida da lista de palavras
+    
+    letras_separadas = []                                                      #lista de letras separadas de uma palavra/ conjunto de palavras
+    for e in palavra_escolhida:
+        letras_separadas.append(e)
+    
+    coordenadasL = [] 
+    lapis.penup()                                                         #lista que conterá as coordenadas em que deverão estar as letras
+    lapis.setpos(-300,-120)
+    lapis.pendown()                                                    #localização em que será desenhada a primeira lacuna
+    for i in letras_separadas:                                                 #Dsenhará as lacunas da(s) palavra(s) e registrará as coordenadas de cada letra
+        lapis.width(3)
+        lapis.color('black')
+        lapis.setheading(0)
+        if i == ' ':
+            posicao_espaco = lapis.position
+            coordenadasL.append(posicao_espaco)
+            lapis.forward(40)
+        else:         
+            posição_letra = lapis.position()                                   #registra a coordenada da lacuna na lista 'coordenadasL' para que depois seja possível retornar a essa coordenada e escrever uma letra sobre ela
+            lapis.pendown()
+            lapis.forward(25)
+            lapis.penup()
+            lapis.forward(15)        
+            coordenadasL.append(posição_letra)
+
+    letras_certas = []
+    letras_erradas = []    
+    while True:
+    
+        letra_inserida_raw = forca.textinput('Letra','Insira uma letra qualquer ("cancel" para sair)')                  
+        caneta.clear()
+        
+        if letra_inserida_raw == None:
+            z=None
+            break
+        
+        else:
+            letra_inserida = letra_inserida_raw.upper()            
+            if letra_inserida in letras_certas or letra_inserida in letras_erradas:
+                caneta.color('darkgreen')
+                caneta.penup()
+                caneta.setpos(200,150)
+                caneta.pendown()
+                caneta.write('Você já digitou esta letra',font=('Arial',20,'bold'))
+                
+    
+            elif letra_inserida in letras_separadas:
+                letras_certas.append(letra_inserida)
+                for c in range(0,int(len(letras_separadas))):
+                    n=letras_separadas[c]
+                    if letra_inserida == n:
+                        lapis.setpos(coordenadasL[c])
+                        lapis.color('black')
+                        lapis.pendown()
+                        lapis.write(n,font=('Arial',18,'bold'))
+                        lapis.penup()
+                    else:
+                        None 
+    
+                if len(letras_certas) == len(letras_separadas):
+                        lapis.setpos(-300,-50)
+                        lapis.color('green')
+                        lapis.pendown()
+                        lapis.write('VICTORY / VOCÊ VENCEU',font=('Arial',40,'bold'))
+                        lapis.penup()
+                        z = forca.textinput('Continuar?','Clique em "Ok" para continuar e em "cancel" para sair')
+                        if z != None:
+                            break
+                        else:
+                            break
+                    
+                
+                    
+            elif letra_inserida not in letras_separadas:
+                letras_erradas.append(letra_inserida)
+                lapis.setpos(-350,-300)
+                lapis.color('red')
+                lapis.pendown()
+                lapis.write('Chutes errados: %s'%(letras_erradas),font=('Arial',14,'bold'))
+                lapis.penup()
+                if len(letras_erradas)==1:
+                    cabeca()
+                elif len(letras_erradas)==2:
+                    tronco()
+                elif len(letras_erradas)==3:
+                    braco1()
+                elif len(letras_erradas)==4:
+                    braco2()
+                elif len(letras_erradas)==5:
+                    perna1()
+                elif len(letras_erradas)==6:
+                    perna2()
+                else:
+                    rosto()
+                    lapis.setpos(-300,-100)
+                    lapis.color('red')
+                    lapis.pendown()
+                    lapis.write('YOU DIED / VOCÊ MORREU',font=('Arial',40,'bold'))
+                    lapis.penup()                
+                    z = forca.textinput('Continuar?','Clique em "Ok" para continuar e em "cancel" para sair')
+                    if z != None:
+                        break
+                    else:
+                        break
+    if z == None:
+        break
+lapis.penup()
+lapis.color('green')
+lapis.setheading(0)    
+lapis.setpos(-550,150)
+lapis.pendown()
+lapis.write('Clique em qualquer lugar da tela para fechar',font=('Arial',40,'bold'))
+forca.exitonclick()
+palavras.close
